@@ -28,7 +28,7 @@ public class MyPlayer {
                     /*if(j<=i && k<= j && k <= i){
                         System.out.println((i+"") + (j+"") + (k+""));
                     }*/
-                    System.out.println((i+"") + (j+"") + (k+""));
+                    //System.out.println((i+"") + (j+"") + (k+""));
                 }
             }
         }
@@ -55,20 +55,46 @@ public class MyPlayer {
         return myMove;
     }
 
-    public ArrayList<int[]> printPossibilitiesOneStepAway(int[] board){
+    public static ArrayList<int[]> possibilitiesOneStepAway(int[] board){ // working
         ArrayList<int[]> possibilities = new ArrayList<>();
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i]; j++){
-                int[] temp = new int[10];
+                int[] temp = new int[board.length];
+                for(int l = 0; l < temp.length; l++){
+                    temp[l] = board[l];
+                }
 
-                for(int k = j; k < temp.length; k++){
+                for(int k = i; k < temp.length; k++){
                     //Math.min
-                    temp[k] = Math.min(board[k], i); //takes care of up and down
+                    temp[k] = Math.min(board[k], j); //takes care of up and down
 
                 }
+                if(!possibilities.contains(temp) && temp[0] != 0) possibilities.add(temp);
             }
         }
         return possibilities;
     }
 
+    public static void calculateWinStates(int[] board){
+
+
+
+    }
+
+    public static void calculateLoseStates(){
+
+
+
+    }
+
+    public static int[] calculateBestMove(int[] board){ // to do
+        int[] initialLose = new int[]{1,0,0,0,0,0,0,0,0,0};
+
+        ArrayList<int[]> knownLoseStates = new ArrayList<>();
+        ArrayList<int[]> knownWinStates = new ArrayList<>();
+
+        knownLoseStates.add(initialLose);
+
+        return null;
+    }
 }

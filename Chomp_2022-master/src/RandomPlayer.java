@@ -23,7 +23,7 @@ public class RandomPlayer {
         do {
             randomRow = (int) (Math.random() * 10);
             randomCol = (int) (Math.random() * 10);
-        } while(!gameBoard[randomRow][randomCol].isAlive);
+        } while(gameBoard[randomRow][randomCol].isAlive);
 
         myMove = new Point(randomRow,randomCol);
         return myMove;

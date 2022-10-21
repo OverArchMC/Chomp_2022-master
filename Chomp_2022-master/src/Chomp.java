@@ -13,6 +13,7 @@ import javax.swing.*;
 
 //Keyboard and Mouse
 import java.awt.event.*;
+import java.util.ArrayList;
 
 //*******************************************************************************
 // Class Definition Section
@@ -84,6 +85,18 @@ public class Chomp implements Runnable, MouseListener {
         //players
         randomPlayer = new RandomPlayer();
         aiPlayer = new MyPlayer();
+
+        int[] exampleBoard = new int[]{10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+
+        ArrayList<int[]> test = MyPlayer.possibilitiesOneStepAway(exampleBoard);
+
+        for(int i = 0; i < test.size(); i++){
+            for(int j = 0; j < test.get(i).length; j++){
+                System.out.print(test.get(i)[j] + " ");
+            }
+            System.out.println();
+
+        }
 
 
     }//
