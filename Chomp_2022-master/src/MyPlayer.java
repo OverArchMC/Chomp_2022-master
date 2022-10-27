@@ -81,20 +81,45 @@ public class MyPlayer {
 
     }
 
-    public static void calculateLoseStates(){
+    public static void calculateLoseStates(ArrayList<int[]> knownLoseStates, ArrayList<int[]> knownWinStates, int[] currBoard){
+        if(knownLoseStates.size() > 1 &&
+                (knownLoseStates.contains(currBoard) || knownWinStates.contains(currBoard))){
+            return;
+        }
 
+        ArrayList<int[]> possibilities = possibilitiesOneStepAway(currBoard);
+
+        boolean loseState = true;
+        for(int[] possibility : possibilities){
+            if(!knownWinStates.contains(possibility)){
+                loseState = false;
+            }
+
+
+        }
+
+        if(loseState){
+            knownLoseStates.add(currBoard);
+        }else{
+            knownWinStates.add(currBoard);
+        }
 
 
     }
 
-    public static int[] calculateBestMove(int[] board){ // to do
-        int[] initialLose = new int[]{1,0,0,0,0,0,0,0,0,0};
+    public static ArrayList<int[]> calculateBestMove(int[] board){ // to do
+        int[] initialLose = new int[board.length];
+        initialLose[0] = 1;
 
         ArrayList<int[]> knownLoseStates = new ArrayList<>();
         ArrayList<int[]> knownWinStates = new ArrayList<>();
 
         knownLoseStates.add(initialLose);
 
-        return null;
+        initialLose[0]++; // testing
+
+        calculateLoseStates(knownLoseStates, knownWinStates, initialLose);
+
+        return knownLoseStates;
     }
 }
