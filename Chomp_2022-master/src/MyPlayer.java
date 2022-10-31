@@ -120,6 +120,60 @@ public class MyPlayer {
 
         calculateLoseStates(knownLoseStates, knownWinStates, initialLose);
 
+        HashSet<int[]> allBoards = allPossibleBoards(board);
+        for(int[] i : allBoards){
+            for(int j = 0; j < i.length; j++){
+                System.out.print(i[j] + " ");
+            }
+            System.out.println();
+        }
+
         return knownLoseStates;
+    }
+
+    public static HashSet<int[]> allBoards = new HashSet<>();
+
+    public static HashSet<int[]> allPossibleBoards(int[] currBoard){
+        //HashSet<int[]> allBoards = new HashSet<>();
+
+        if(isPossibleBoard(currBoard)){
+            allBoards.add(currBoard);
+        }else{
+            return null;
+        }
+
+        for(int i = 0; i < currBoard.length; i++){
+            int[] newBoard = currBoard;
+            newBoard[i]++;
+            if(!allBoards.contains(newBoard)) allBoards.addAll(allPossibleBoards(newBoard));
+
+            int[] newBoard2 = currBoard;
+            newBoard2[i]--;
+            if(!allBoards.contains(newBoard2)) allBoards.addAll(allPossibleBoards(newBoard2));
+        }
+
+        return allBoards;
+    }
+
+    public static boolean isPossibleBoard(int[] board){
+        boolean isPossible = true;
+
+        if(board[0] == 0){
+            isPossible = false;
+        }
+
+        for(int i = 0; i < board.length; i++){
+            for(int j = i+1; j < board.length; j++){
+                if(board[i] < board[j]){
+                    isPossible = false;
+                }
+
+            }
+            if(board[i] > board.length || board[i] < 0){
+                isPossible = false;
+            }
+        }
+
+        return isPossible;
     }
 }
