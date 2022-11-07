@@ -5,6 +5,8 @@ public class MyPlayer {
     public Chip[][] gameBoard;
     public int[] columns;
 
+    public HashMap<Long, Point> loseStates = new HashMap<>(); 
+
     public MyPlayer() {
         columns = new int[10];
 
@@ -22,16 +24,16 @@ public class MyPlayer {
         }
 
         //prints every possible board combination within a 3x3 grid
-        for(int i = 1; i <= 3; i++){
+        /*for(int i = 1; i <= 3; i++){
             for(int j = 0; j <= i; j++){
                 for(int k = 0; k <= j; k++){
-                    /*if(j<=i && k<= j && k <= i){
+                    if(j<=i && k<= j && k <= i){
                         System.out.println((i+"") + (j+"") + (k+""));
-                    }*/
+                    }
                     //System.out.println((i+"") + (j+"") + (k+""));
                 }
             }
-        }
+        }*/
     }
 
     public Point move(Chip[][] pBoard) {
@@ -55,7 +57,7 @@ public class MyPlayer {
         return myMove;
     }
 
-    public static ArrayList<int[]> possibilitiesOneStepAway(int[] board){ // working
+    public ArrayList<int[]> possibilitiesOneStepAway(int[] board){ // working ArrayList version
         ArrayList<int[]> possibilities = new ArrayList<>();
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i]; j++){
@@ -75,13 +77,35 @@ public class MyPlayer {
         return possibilities;
     }
 
-    public static void calculateWinStates(int[] board){
+    public HashMap<Point, int[]> possibilitiesOneStepAwayWithPoints(int[] board){ // In progress Point version
+//        ArrayList<int[]> possibilities = new ArrayList<>();
+        HashMap<Point, int[]> possibilities = new HashMap<>();
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i]; j++){
+                int[] temp = new int[board.length];
+                for(int l = 0; l < temp.length; l++){
+                    temp[l] = board[l];
+                }
 
+                for(int k = i; k < temp.length; k++){
+                    //Math.min
+                    temp[k] = Math.min(board[k], j); //takes care of up and down
 
-
+                }
+                if(temp[0] != 0) possibilities.put(new Point(i, j), temp);
+            }
+        }
+        return possibilities;
     }
 
-    public static void calculateLoseStates(ArrayList<int[]> knownLoseStates, ArrayList<int[]> knownWinStates, int[] currBoard){
+    /*public static void calculateWinStates(int[] board){
+
+
+
+    }*/
+
+    // Testing to be done
+    /*public static void calculateLoseStates(ArrayList<int[]> knownLoseStates, ArrayList<int[]> knownWinStates, int[] currBoard){
         if(knownLoseStates.size() > 1 &&
                 (knownLoseStates.contains(currBoard) || knownWinStates.contains(currBoard))){
             return;
@@ -105,9 +129,9 @@ public class MyPlayer {
         }
 
 
-    }
+    }*/
 
-    public static ArrayList<int[]> calculateBestMove(int[] board){ // to do
+    /*public static ArrayList<int[]> calculateBestMove(int[] board){ // to do
         int[] initialLose = new int[board.length];
         initialLose[0] = 1;
 
@@ -129,9 +153,9 @@ public class MyPlayer {
         }
 
         return knownLoseStates;
-    }
+    }*/
 
-    public static HashSet<int[]> allBoards = new HashSet<>();
+    /*public static HashSet<int[]> allBoards = new HashSet<>();
 
     public static HashSet<int[]> allPossibleBoards(int[] currBoard){
         //HashSet<int[]> allBoards = new HashSet<>();
@@ -153,9 +177,19 @@ public class MyPlayer {
         }
 
         return allBoards;
+    }*/
+
+    public long convertBoardToLong(int[] board){ // working
+        long result = 0;
+
+        for(int i = 0; i < board.length; i++){
+            result += Math.pow(board.length+1, i) * board[i];
+        }
+
+        return result;
     }
 
-    public static boolean isPossibleBoard(int[] board){
+    public boolean isPossibleBoard(int[] board){ // test
         boolean isPossible = true;
 
         if(board[0] == 0){
@@ -175,5 +209,9 @@ public class MyPlayer {
         }
 
         return isPossible;
+    }
+
+    public static Point bestMove(int[] board){ // to be completed
+        return null;
     }
 }

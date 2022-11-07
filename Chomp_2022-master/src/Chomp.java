@@ -101,25 +101,25 @@ public class Chomp implements Runnable, MouseListener {
 
         int[] testBoard = new int[]{3, 3, 3};
 
-        ArrayList<int[]> testing = MyPlayer.calculateBestMove(testBoard);
+        /*ArrayList<int[]> testing = MyPlayer.calculateBestMove(testBoard);
 
         for(int i = 0; i < testing.size(); i++){ // solution testing
             for(int j = 0; j < testing.get(i).length; j++){
                 //System.out.print(testing.get(i)[j] + " ");
             }
             //System.out.println();
-        }
+        }*/
 
-        HashSet<int[]> alsoTesting = MyPlayer.allPossibleBoards(testBoard);
+        //HashSet<int[]> alsoTesting = MyPlayer.allPossibleBoards(testBoard);
 
-        System.out.println(alsoTesting.size());
+        /*System.out.println(alsoTesting.size());
 
         for(int[] i : alsoTesting){
             for(int j = 0; j < i.length; j++){
                 System.out.print(i[j] + " ");
             }
             System.out.println();
-        }
+        }*/
 
 
     }//
