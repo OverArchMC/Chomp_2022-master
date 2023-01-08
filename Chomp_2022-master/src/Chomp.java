@@ -89,7 +89,7 @@ public class Chomp implements Runnable, MouseListener {
 
         int[] exampleBoard = new int[]{3, 3, 3};
 
-        ArrayList<int[]> test = MyPlayer.possibilitiesOneStepAway(exampleBoard);
+        /*ArrayList<int[]> test = MyPlayer.possibilitiesOneStepAway(exampleBoard);
 
         for(int i = 0; i < test.size(); i++){
             for(int j = 0; j < test.get(i).length; j++){
@@ -97,7 +97,7 @@ public class Chomp implements Runnable, MouseListener {
             }
             //System.out.println();
 
-        }
+        }*/
 
         int[] testBoard = new int[]{3, 3, 3};
 
